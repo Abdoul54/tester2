@@ -1,0 +1,8 @@
+<?php
+
+namespace App\Repositories\Contracts;
+
+interface {{Name}}RepositoryInterface
+{
+    // TODO: define methods
+}
