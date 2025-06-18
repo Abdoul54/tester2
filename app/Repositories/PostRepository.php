@@ -19,9 +19,10 @@ class PostRepository implements PostRepositoryInterface
     public function createPost(array $data): mixed
     {
         try {
+            // dd($data['thumbnail']);
             $thumbnailPath = $this->storageRepo->storeFile($data['thumbnail']) ?? null;
+            // dd($thumbnailPath);
 
-            dd($thumbnailPath);
             $post = Post::create([
                 'title' => $data['title'],
                 'content' => $data['content'],

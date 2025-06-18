@@ -28,7 +28,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 'error' => 'Please provide a valid authentication token'
             ], 401);
         });
-        
+
         // Handle 404 errors for API routes
         $exceptions->render(function (NotFoundHttpException $e, Request $request) {
             return response()->json([
@@ -36,7 +36,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 'error' => 'The requested resource was not found'
             ], 404);
         });
-        
+
         // Handle all other exceptions for API
         $exceptions->render(function (Throwable $e, Request $request) {
             if ($request->is('api/*') || $request->expectsJson()) {

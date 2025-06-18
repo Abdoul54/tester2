@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 // Force JSON responses for all API routes
 Route::middleware(['api'])->group(function () {
 
+
     Route::get('/user', function (Request $request) {
         return $request->user();
     })->middleware('auth:sanctum');

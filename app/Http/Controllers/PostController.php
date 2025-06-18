@@ -59,7 +59,6 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $request): JsonResponse
     {
-        dd('ok');
         $data = $request->validated();
 
         try {

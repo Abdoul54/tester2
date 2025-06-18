@@ -14,8 +14,8 @@ class StorageRepository implements StorageRepositoryInterface
         // Generate a unique filename
         $filename = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
 
-        // Store file in MinIO
-        $stored = Storage::disk('minio')->putFileAs('posts', $file, $filename);
+        // Store file in MinIO using 's3' disk (which is configured for MinIO)
+        $stored = Storage::disk('s3')->putFileAs('posts', $file, $filename);
 
         if (!$stored) {
             throw new \Exception('Failed to store image in MinIO');
@@ -26,13 +26,13 @@ class StorageRepository implements StorageRepositoryInterface
 
     public function deleteFile(string $path): bool
     {
-        return Storage::disk('minio')->delete($path);
+        return Storage::disk('s3')->delete($path);
     }
 
     public function getFileUrl(string $path): string
     {
         try {
-            return Storage::disk('minio')->url($path);
+            return Storage::disk('s3')->url($path);
         } catch (\Exception $e) {
             Log::warning('Failed to generate image URL', [
                 'path' => $path,
