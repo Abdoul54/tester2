@@ -19,9 +19,11 @@ class PostRepository implements PostRepositoryInterface
     public function createPost(array $data): mixed
     {
         try {
-            // dd($data['thumbnail']);
-            $thumbnailPath = $this->storageRepo->storeFile($data['thumbnail']) ?? null;
-            // dd($thumbnailPath);
+            // Only store thumbnail if it exists and is not null
+            $thumbnailPath = null;
+            if (isset($data['thumbnail']) && $data['thumbnail']) {
+                $thumbnailPath = $this->storageRepo->storeFile($data['thumbnail']);
+            }
 
             $post = Post::create([
                 'title' => $data['title'],
@@ -33,8 +35,6 @@ class PostRepository implements PostRepositoryInterface
                 'thumbnail' => $thumbnailPath
             ]);
 
-
-
             // Load the user relationship for the resource
             $post->load('user');
 
@@ -43,6 +43,7 @@ class PostRepository implements PostRepositoryInterface
             throw $th;
         }
     }
+
 
     public function getPost(int $id): mixed
     {
@@ -144,7 +145,16 @@ class PostRepository implements PostRepositoryInterface
                 );
             }
 
-            $post->update($data);
+            // Only store thumbnail if it exists and is not null
+            $thumbnailPath = null;
+            if (isset($data['thumbnail']) && $data['thumbnail']) {
+                $thumbnailPath = $this->storageRepo->storeFile($data['thumbnail']);
+            }
+
+            $post->update([
+                ...$data,
+                'thumbnail' => $thumbnailPath ?? $post->thumbnail
+            ]);
 
             // Load the user relationship for the resource
             $post->load('user');

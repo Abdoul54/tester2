@@ -111,6 +111,22 @@ services:
                 - ping
             retries: 3
             timeout: 5s
+    pgadmin:
+        image: 'dpage/pgadmin4:latest'
+        ports:
+            - '${FORWARD_PGADMIN_PORT:-8585}:80'
+        environment:
+            PGADMIN_DEFAULT_EMAIL: '${PGADMIN_EMAIL:-admin@example.com}'
+            PGADMIN_DEFAULT_PASSWORD: '${PGADMIN_PASSWORD:-secret}'
+            PGADMIN_CONFIG_SERVER_MODE: 'False'
+            PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+        volumes:
+            - 'sail-pgadmin:/var/lib/pgadmin'
+            - './docker/pgadmin/servers.json:/pgadmin4/servers.json:ro'
+        networks:
+            - sail
+        depends_on:
+            - pgsql
 networks:
     sail:
         driver: bridge
@@ -122,4 +138,6 @@ volumes:
     sail-minio:
         driver: local
     sail-rabbitmq:
+        driver: local
+    sail-pgadmin:
         driver: local

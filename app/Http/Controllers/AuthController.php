@@ -28,7 +28,7 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => 'error',
                     'message' => 'User registration failed',
-                ], 500);
+                ], 400);
             }
 
             return response()->json([
@@ -40,7 +40,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $th->getMessage(),
-            ], 500);
+            ], 400);
         }
     }
 
@@ -70,7 +70,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $th->getMessage(),
-            ], 500);
+            ], 400);
         }
     }
 
@@ -86,7 +86,7 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Logout failed',
-                ], 500);
+                ], 400);
             }
 
             return response()->json([
@@ -97,7 +97,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $th->getMessage(),
-            ], 500);
+            ], 400);
         }
     }
 
@@ -113,7 +113,7 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Logout from all devices failed',
-                ], 500);
+                ], 400);
             }
 
             return response()->json([
@@ -124,7 +124,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $th->getMessage(),
-            ], 500);
+            ], 400);
         }
     }
 }

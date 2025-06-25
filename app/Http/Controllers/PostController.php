@@ -50,7 +50,7 @@ class PostController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $th->getMessage(),
-            ], 500);
+            ], 400);
         }
     }
 
@@ -60,6 +60,8 @@ class PostController extends Controller
     public function store(CreatePostRequest $request): JsonResponse
     {
         $data = $request->validated();
+
+
 
         try {
             $post = $this->postRepo->createPost($data);
@@ -75,7 +77,7 @@ class PostController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $th->getMessage(),
-            ], 500);
+            ], 400);
         }
     }
 
@@ -123,7 +125,7 @@ class PostController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $th->getMessage(),
-            ], 500);
+            ], 400);
         }
     }
 
@@ -144,7 +146,7 @@ class PostController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $th->getMessage(),
-            ], 500);
+            ], 400);
         }
     }
 
@@ -178,7 +180,7 @@ class PostController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $th->getMessage(),
-            ], 500);
+            ], 400);
         }
     }
 }

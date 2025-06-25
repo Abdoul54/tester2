@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Posts;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class GetAllPostsRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class GetAllPostsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::check();
     }
 
     /**
